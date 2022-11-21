@@ -1,8 +1,10 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { getCoinList } from '../api'
 
+
+// * styled-components 적용
 const Container = styled.div`
     padding: 0px 20px;
 `
@@ -50,8 +52,10 @@ interface CoinsInterface {
 const Coins = () => {
     const [coins, setCoins] = useState<CoinsInterface[]>([])
     const [loading, setLoading] = useState<boolean>(true)
-    const coinListApi = async () => {
-        await axios.get('https://api.coinpaprika.com/v1/coins')
+
+    //코인 리스트 호출
+    const coinListApi = () => {
+        getCoinList()
             .then(res => {
                 setCoins(res.data.splice(0, 49))
                 setLoading(false)

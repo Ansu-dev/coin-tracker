@@ -1,25 +1,14 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
+import { getCoin } from '../api';
 
 
-// interface CoinInterface {
-//     "id": string,
-//     "name": string,
-//     "symbol": string,
-//     "rank": number,
-//     "is_new": boolean,
-//     "is_active": boolean,
-//     "type": string,
-//     "logo": string,
-
-// }
 
 const Coin = () => {
     const { coinId } = useParams(); //v6 이상은 인터페이스 설정을 하지 않아도 됨
     const [coin, setCoin] = useState({})
-    const coinDetail = async () => {
-        await axios.get(`https://api.coinpaprika.com/v1/coins/${coinId}`)
+    const coinDetail = () => {
+        getCoin(coinId)
             .then(res => {
                 setCoin(res.data)
             })
