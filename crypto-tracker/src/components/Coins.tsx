@@ -7,7 +7,15 @@ import { getCoinList } from '../api'
 // * styled-components 적용
 const Container = styled.div`
     padding: 0px 20px;
+    max-width: 480px;
 `
+
+const Image = styled.img`
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+`
+
 const Header = styled.header`
     height: 10vh;
     display: flex;
@@ -25,7 +33,8 @@ const Coin = styled.li`
     margin-bottom: 10px;
     a {
         transition: color 0.2s ease-in;
-        display: block;
+        display: flex;
+        align-items: center;
     }
     &:hover {
         a {
@@ -77,12 +86,15 @@ const Coins = () => {
                 {
                     coins?.map(coin => {
                         return <Coin key={coin.id}>
-                            <Link to={`/${coin.id}}`}>{coin.name} &rarr;</Link>
+                            <Link to={{ pathname: `/${coin.id}` }}>
+                                <Image src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt="coin_symbol" />
+                                {coin.name} &rarr;
+                            </Link>
                         </Coin>
                     })
                 }
             </CoinList>
         }
-    </Container>
+    </Container >
 }
 export default Coins

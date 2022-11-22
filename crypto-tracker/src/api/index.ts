@@ -9,7 +9,7 @@ export const getCoinList = async () => {
 
 //코인 정보
 export const getCoin = async (coinId: string | undefined) => {
-    return await api.get(`/coin/${coinId}`)
+    return await api.get(`/coins/${coinId}`)
 }
 
 
