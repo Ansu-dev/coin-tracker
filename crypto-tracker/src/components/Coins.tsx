@@ -7,7 +7,10 @@ import { getCoinList } from '../api'
 // * styled-components 적용
 const Container = styled.div`
     padding: 0px 20px;
-    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 
 const Image = styled.img`
@@ -23,11 +26,17 @@ const Header = styled.header`
     align-items: center;
 `
 
-const CoinList = styled.ul``
+const CoinList = styled.ul`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 
 const Coin = styled.li`
     background-color: white;
-    color: ${props => props.theme.bgColor};
+    color: ${props => props.theme.textColor};
+    width: 70%;
     padding: 20px;
     border-radius: 20px;
     margin-bottom: 10px;
@@ -44,8 +53,23 @@ const Coin = styled.li`
 `
 
 const Title = styled.h1`
-    color: ${props => props.theme.accentColor}
+    color: ${props => props.theme.accentColor};
+    font-size: 40px;
+    font-weight: bold;
 `
+
+const FixedBtn = styled.button`
+    width: 50px;
+    height: 50px;
+    font-size: 12px;
+    background-color: ${props => props.theme.btnColor};
+    position: fixed;
+    right: 3%;
+    bottom: 3%;
+    border-radius: 50px;
+    border: 1px solid ${props => props.theme.btnColor};
+`
+
 
 //특정 프로퍼티만 담을 object interface 지정(타입 추론)
 interface CoinsInterface {
@@ -95,6 +119,7 @@ const Coins = () => {
                 }
             </CoinList>
         }
+        <FixedBtn>Change</FixedBtn>
     </Container >
 }
 export default Coins

@@ -1,10 +1,11 @@
-import 'styled-components'
+import "styled-components";
 
-
-declare module 'styled-components' {
-    export interface DefaultTheme {
-        bgColor: "#2f3640",
-        textColor: "#f5f6fa",
-        accentColor: "#4cd137",
-    }
+declare module "styled-components" {
+  export interface DefaultTheme {
+    textColor: string;
+    bgColor: string;
+    accentColor: string;
+    cardBgColor: string;
+    btnColor: string;
+  }
 }

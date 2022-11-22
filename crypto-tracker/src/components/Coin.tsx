@@ -1,8 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { getCoin } from '../api';
 
 
+
+
+const BackBtn = styled.button`
+    position: absolute;
+    top: 30px;
+    left: 0;
+    border: 0;
+    background-color: transparent;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    transition: 0.2s;
+    &:hover {
+    color: ${(props) => props.theme.bgColor};
+    background-color: #fff;
+}
+`
 
 
 interface InfoData {
