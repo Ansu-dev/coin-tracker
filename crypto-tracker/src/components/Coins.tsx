@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 import { getCoinList } from '../api'
-
+import { isDarkAtom } from '../recoil/atom'
+import { IoSunnyOutline, IoMoonSharp } from "react-icons/io5";
 
 // * styled-components 적용
 const Container = styled.div`
@@ -58,20 +60,17 @@ const Title = styled.h1`
     font-weight: bold;
 `
 
-const FixedBtn = styled.button`
-    width: 50px;
-    height: 50px;
-    font-size: 12px;
-    background-color: ${props => props.theme.btnColor};
-    position: fixed;
-    right: 3%;
-    bottom: 3%;
-    border-radius: 50px;
-    border: 1px solid ${props => props.theme.btnColor};
+const FixedBtn = styled.div`
+    height: 60px;
+    display: flex;
+    padding: 0px 20px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
 `
 
 
-//특정 프로퍼티만 담을 object interface 지정(타입 추론)
+// * 특정 프로퍼티만 담을 object interface 지정(타입 추론)
 interface CoinsInterface {
     id: string,
     name: string,
@@ -83,6 +82,7 @@ interface CoinsInterface {
 }
 
 const Coins = () => {
+    const isDark = useRecoilValue(isDarkAtom)
     const [coins, setCoins] = useState<CoinsInterface[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
@@ -119,7 +119,11 @@ const Coins = () => {
                 }
             </CoinList>
         }
-        <FixedBtn>Change</FixedBtn>
+        <FixedBtn>
+            {
+                isDark ? <IoMoonSharp width={50} height={50} /> : <IoSunnyOutline />
+            }
+        </FixedBtn>
     </Container >
 }
 export default Coins
