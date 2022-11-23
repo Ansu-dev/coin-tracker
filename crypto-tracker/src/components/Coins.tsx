@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { getCoinList } from '../api'
 import { isDarkAtom } from '../recoil/atom'
@@ -61,12 +61,10 @@ const Title = styled.h1`
 `
 
 const FixedBtn = styled.div`
-    height: 60px;
-    display: flex;
-    padding: 0px 20px;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
+    position: fixed;
+    right: 3%;
+    bottom: 3%;
+    cursor: pointer;
 `
 
 
@@ -82,7 +80,7 @@ interface CoinsInterface {
 }
 
 const Coins = () => {
-    const isDark = useRecoilValue(isDarkAtom)
+    const [theme, setTheme] = useRecoilState(isDarkAtom)
     const [coins, setCoins] = useState<CoinsInterface[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
@@ -98,6 +96,10 @@ const Coins = () => {
             })
 
     }
+    const themeChange = () => {
+        setTheme(!theme)
+    }
+
     useEffect(() => {
         coinListApi()
     }, [])
@@ -119,9 +121,9 @@ const Coins = () => {
                 }
             </CoinList>
         }
-        <FixedBtn>
+        <FixedBtn onClick={themeChange}>
             {
-                isDark ? <IoMoonSharp width={50} height={50} /> : <IoSunnyOutline />
+                theme ? <IoMoonSharp width={50} height={50} /> : <IoSunnyOutline width={50} height={50} />
             }
         </FixedBtn>
     </Container >
