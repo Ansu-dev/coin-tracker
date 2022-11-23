@@ -110,7 +110,7 @@ const Coins = () => {
         {
             loading ? 'Loading...' : <CoinList>
                 {
-                    coins?.map(coin => {
+                    coins.map(coin => {
                         return <Coin key={coin.id}>
                             <Link to={{ pathname: `/${coin.id}` }}>
                                 <Image src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt="coin_symbol" />
@@ -123,7 +123,7 @@ const Coins = () => {
         }
         <FixedBtn onClick={themeChange}>
             {
-                theme ? <IoMoonSharp /> : <IoSunnyOutline />
+                theme ? <IoMoonSharp style={{ fontSize: 40 }} /> : <IoSunnyOutline style={{ fontSize: 40 }} />
             }
         </FixedBtn>
     </Container >

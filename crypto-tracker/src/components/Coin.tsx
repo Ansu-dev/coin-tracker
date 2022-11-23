@@ -192,16 +192,13 @@ const Coin = () => {
                         </Tab>
                     </Tabs>
                     <Routes>
-                        <Route path={`/:coinId/chart`}>
-                            <Chart coinId={coinId}></Chart>
-                        </Route>
-                        <Route path={`/:coinId/price`}>
-                            <Price coinId={coinId}></Price>
-                        </Route>
+                        <Route path={'chart'} element={<Chart coinId={coinId} />}></Route>
+                        <Route path={'price'} element={<Price coinId={coinId} />}></Route>
                     </Routes>
                 </>
-            )}
-        </Container>
+            )
+            }
+        </Container >
     )
 }
 export default Coin

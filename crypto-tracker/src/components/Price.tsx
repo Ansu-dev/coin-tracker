@@ -1,6 +1,9 @@
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import { getCoinTickers } from '../api';
+import { TiArrowDown, TiArrowUp } from "react-icons/ti";
+import { useParams } from 'react-router-dom';
+
 
 
 const Container = styled.div`
@@ -15,10 +18,18 @@ const CurrentPrice = styled.h2`
     justify-content: center;
 `
 const PricePercent = styled.span<{ isActive: boolean }>`
+    display: flex;
+    align-items: center;
     margin-top: 40px;
     font-size: 40px;
     color: ${(props) => (props.isActive ? "#F08080" : "#ADD8E6")};
 `
+
+const Para = styled.p`
+  margin-top: 40px;
+  font-size: 30px;
+  color: ${(props) => props.theme.textColor};
+`;
 
 interface PriceProps {
     coinId: string | undefined;
@@ -63,8 +74,24 @@ export interface TickerData {
 
 export const Price = ({ coinId }: PriceProps) => {
     const { isLoading, data: price } = useQuery<TickerData>(["tickers", coinId], () => getCoinTickers(coinId), { refetchInterval: 5000 })
-    console.log(price)
+    const isActive = price === undefined ? true : price?.data.quotes.USD.percent_change_24h > 0 // * 0보다 클때
     return (
-        <div>Price</div>
+        <>
+            {
+                isLoading ? ("Loading Chart...") : (
+                    <>
+                        <Container>
+                            <Para>Compare to yesterday... </Para>
+                            <PricePercent isActive={isActive}>
+                                {price === undefined ? null : Math.abs(price?.data.quotes.USD.percent_change_24h)}
+                                %
+                                {isActive ? (<TiArrowUp style={{ fontSize: 35 }}></TiArrowUp>) : (<TiArrowDown style={{ fontSize: 30 }}></TiArrowDown>)}
+                            </PricePercent>
+                        </Container>
+                        <CurrentPrice>${price?.data.quotes.USD.price.toFixed(2)}</CurrentPrice>
+                    </>
+                )
+            }
+        </>
     )
 }
