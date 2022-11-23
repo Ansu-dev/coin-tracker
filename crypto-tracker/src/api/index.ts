@@ -18,7 +18,7 @@ export const getCoin = async (coinId: string | undefined) : Promise<InfoData> =>
 }
 
 
-//코인 그래프
+//코인 가격 등 정보
 export const getCoinTickers = async (coinId: string | undefined) : Promise<TickerData> => {
     return await api.get(`/tickers/${coinId}`)
 }
