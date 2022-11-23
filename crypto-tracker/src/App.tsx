@@ -2,9 +2,8 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Router from './Router';
 import { ReactQueryDevtools } from "react-query/devtools";
 import { darkTheme, lightTheme } from "./theme";
-import { RecoilRoot, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { isDarkAtom } from "./recoil/atom"
-import { useEffect } from 'react';
 
 //Reset Css
 const GlobalStyle = createGlobalStyle`

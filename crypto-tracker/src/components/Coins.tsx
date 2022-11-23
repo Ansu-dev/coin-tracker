@@ -84,7 +84,7 @@ const Coins = () => {
     const [coins, setCoins] = useState<CoinsInterface[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
-    //코인 리스트 호출
+    //! 코인 리스트 호출 => 데이터 가공이 필요해서 useQuery가 아닌 일반 함수 호출
     const coinListApi = () => {
         getCoinList()
             .then(res => {
@@ -123,7 +123,7 @@ const Coins = () => {
         }
         <FixedBtn onClick={themeChange}>
             {
-                theme ? <IoMoonSharp width={50} height={50} /> : <IoSunnyOutline width={50} height={50} />
+                theme ? <IoMoonSharp /> : <IoSunnyOutline />
             }
         </FixedBtn>
     </Container >
