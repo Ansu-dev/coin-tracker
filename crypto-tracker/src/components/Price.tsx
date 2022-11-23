@@ -22,7 +22,7 @@ const PricePercent = styled.span<{ isActive: boolean }>`
     align-items: center;
     margin-top: 40px;
     font-size: 40px;
-    color: ${(props) => (props.isActive ? "#F08080" : "#ADD8E6")};
+    color: ${(props) => (props.isActive ? "#F08080" : "#0F33E7")};
 `
 
 const Para = styled.p`
@@ -85,7 +85,7 @@ export const Price = ({ coinId }: PriceProps) => {
                             <PricePercent isActive={isActive}>
                                 {price === undefined ? null : Math.abs(price?.data.quotes.USD.percent_change_24h)}
                                 %
-                                {isActive ? (<TiArrowUp style={{ fontSize: 35 }}></TiArrowUp>) : (<TiArrowDown style={{ fontSize: 30 }}></TiArrowDown>)}
+                                {isActive ? (<TiArrowUp style={{ fontSize: 37 }}></TiArrowUp>) : (<TiArrowDown style={{ fontSize: 37 }}></TiArrowDown>)}
                             </PricePercent>
                         </Container>
                         <CurrentPrice>${price?.data.quotes.USD.price.toFixed(2)}</CurrentPrice>

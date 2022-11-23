@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useParams, useNavigate, Link, Routes, Route, useMatch } from 'react-router-dom';
 import styled from 'styled-components';
@@ -76,7 +77,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   font-size: 12px;
   font-weight: 400;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0px;
+  padding: 10px;
   border-radius: 10px;
   color: ${(props) =>
         props.isActive ? props.theme.accentColor : props.theme.textColor};
@@ -142,10 +143,13 @@ const Coin = () => {
     const { isLoading: tickerLoading, data: ticker } = useQuery<TickerData>(["ticker", coinId], () => getCoinTickers(coinId), { refetchInterval: 5000 })
     const loading = infoLoading && tickerLoading // * 두개의 데이터가 모두 fetching이 되어야 loading이 true로 변환
 
-
     const backHistory = () => {
         navigate('/')
     }
+
+    useEffect(() => {
+        navigate('chart')
+    },[])
     return (
         <Container>
             <Header>
