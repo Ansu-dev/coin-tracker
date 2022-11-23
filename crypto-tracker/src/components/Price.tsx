@@ -20,8 +20,8 @@ const PricePercent = styled.span<{ isActive: boolean }>`
     color: ${(props) => (props.isActive ? "#F08080" : "#ADD8E6")};
 `
 
-interface PropsParam {
-    coinId: string;
+interface PriceProps {
+    coinId: string | undefined;
 }
 
 export interface TickerData {
@@ -61,7 +61,7 @@ export interface TickerData {
 }
 
 
-export const Price = ({ coinId }: PropsParam) => {
+export const Price = ({ coinId }: PriceProps) => {
     const { isLoading, data: price } = useQuery<TickerData>(["tickers", coinId], () => getCoinTickers(coinId), { refetchInterval: 5000 })
     console.log(price)
     return (

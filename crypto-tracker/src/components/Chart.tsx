@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 interface ChartProps {
-    coinId: string;
+    coinId: string | undefined;
 }
 
 export interface HistoricalInfo {
@@ -18,7 +18,7 @@ export interface HistoricalInfo {
 }
 
 
-export const Chart = () => {
+export const Chart = ({ coinId }: ChartProps) => {
     return (
         <div>Chart</div>
     )

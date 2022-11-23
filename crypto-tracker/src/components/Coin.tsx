@@ -1,8 +1,9 @@
 import { useQuery } from 'react-query';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link, Routes, Route, useMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { getCoin, getCoinTickers } from '../api';
-import { TickerData } from './Price';
+import { Chart } from './Chart';
+import { Price, TickerData } from './Price';
 
 
 const Container = styled.div`
@@ -129,6 +130,12 @@ export interface InfoData {
 const Coin = () => {
     const { coinId } = useParams(); // * v6 이상은 인터페이스 설정을 하지 않아도 됨
     const navigate = useNavigate() // * v6 이상은 useHistory가 아닌 useNavigate로 이동한다.
+
+    // ? 여러개의 컴포넌트중 보여줄 컴포넌트를 select할 목적?
+    const priceMatch = useMatch('/:coinId/price')
+    const chartMatch = useMatch('/:coinId/chart')
+
+
     // * coin의 정보를 불러옴
     const { isLoading: infoLoading, data: info } = useQuery<InfoData>(["info", coinId], () => getCoin(coinId))
     // * coin의 가격 등 의 정보를 불러옴
@@ -176,22 +183,22 @@ const Coin = () => {
                             <span>{ticker?.data.max_supply}</span>
                         </OverviewItem>
                     </Overview>
-                    {/* <Tabs>
+                    <Tabs>
                         <Tab isActive={chartMatch !== null}>
-                            <Link to={`/${coinId}/chart`}>Chart</Link>
+                            <Link to={`chart`}>Chart</Link>
                         </Tab>
                         <Tab isActive={priceMatch !== null}>
-                            <Link to={`/${coinId}/price`}>Price</Link>
+                            <Link to={`price`}>Price</Link>
                         </Tab>
                     </Tabs>
-                    <Switch>
-                        <Route path={`/:coinId/price`}>
-                            <Price coinId={coinId}></Price>
-                        </Route>
+                    <Routes>
                         <Route path={`/:coinId/chart`}>
                             <Chart coinId={coinId}></Chart>
                         </Route>
-                    </Switch> */}
+                        <Route path={`/:coinId/price`}>
+                            <Price coinId={coinId}></Price>
+                        </Route>
+                    </Routes>
                 </>
             )}
         </Container>
