@@ -2,7 +2,6 @@ import { api } from '../axios'; //api instance 모듈화
 import { HistoricalInfo } from '../components/Chart';
 import { InfoData } from '../components/Coin';
 import { TickerData } from '../components/Price';
-import { historyDate } from '../utils/date';
 
 
 
@@ -25,7 +24,7 @@ export const getCoinTickers = async (coinId: string | undefined): Promise<Ticker
 
 
 //코인 히스토리
-export const getCoinHistory = async (coinId: string | undefined): Promise<HistoricalInfo> => {
+export const getCoinHistory = async (coinId: string | undefined): Promise<HistoricalInfo[]> => {
     let start = new Date()
     start.setHours(start.getHours() + 9)
     start.setDate(start.getDate() - 1)
@@ -33,5 +32,5 @@ export const getCoinHistory = async (coinId: string | undefined): Promise<Histor
     end.setHours(start.getHours() + 9)
     const startDate: string = start.toISOString()
     const endDate: string = end.toISOString()
-    return await api.get(`/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`)
+    return (await api.get(`/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`)).data
 }
